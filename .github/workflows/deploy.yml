@@ -1,0 +1,47 @@
+name: Deploy Laravel to EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ${{ secrets.EC2_PROJECT_PATH }}
+
+            # Latest code pull karo
+            git pull origin master
+
+            # Composer dependencies install karo
+            composer install --no-dev --optimize-autoloader
+
+            # NPM build (agar frontend hai)
+            # npm ci && npm run build
+
+            # Laravel cache clear aur optimize
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            # Database migrations (zarurat ho to)
+            php artisan migrate --force
+
+            # Permissions set karo
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
+
+            echo "✅ Deployment successful!"
