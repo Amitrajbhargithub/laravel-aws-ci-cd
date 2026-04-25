@@ -243,8 +243,8 @@
     <div class="container">
         <div class="header">
             <div class="laravel-icon">⚡</div>
-            <h1>Laravel on AWS EC2 sssss</h1>
-            <p>Successfully Deployed with CI/CD Pipeline  gdgddg</p>
+            <h1>Laravel on AWS EC2 11111</h1>
+            <p>Successfully Deployed with CI/CD Pipeline  111111</p>
             <div class="badge">
                 <span>🟢 GitHub Actions • Active</span>
             </div>
