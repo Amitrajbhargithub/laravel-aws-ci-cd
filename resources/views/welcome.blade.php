@@ -244,7 +244,7 @@
         <div class="header">
             <div class="laravel-icon">⚡</div>
             <h1>Laravel on AWS EC2</h1>
-            <p>Successfully Deployed with CI/CD Pipeline jjjjjj</p>
+            <p>Successfully Deployed with CI/CD Pipeline</p>
             <div class="badge">
                 <span>🟢 GitHub Actions • Active</span>
             </div>
