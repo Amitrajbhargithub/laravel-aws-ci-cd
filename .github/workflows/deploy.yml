@@ -23,24 +23,15 @@ jobs:
           script: |
             cd ${{ secrets.EC2_PROJECT_PATH }}
 
-            # Latest code pull karo
-            git pull origin master
+            # PAT se authenticated pull
+            git pull https://Amitrajbhargithub:${{ secrets.GH_PAT }}@github.com/Amitrajbhargithub/laravel-aws-ci-cd.git master
 
-            # Composer dependencies install karo
-            composer install --no-dev --optimize-autoloader
-
-            # NPM build (agar frontend hai)
-            # npm ci && npm run build
-
-            # Laravel cache clear aur optimize
+            # Laravel cache clear
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
 
-            # Database migrations (zarurat ho to)
-            php artisan migrate --force
-
-            # Permissions set karo
+            # Permissions
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
 
